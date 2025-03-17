@@ -1,0 +1,13 @@
+<div>
+    <button (click)="battingChange()">View Batting Stats</button>
+    <button (click)="pitchingChange()">View Pitching Stats</button>
+    
+
+    <div *ngIf="showBattingStats">
+        <app-batter-stats></app-batter-stats>
+    </div>
+
+    <div *ngIf="showPitchingStats">
+        <app-pitcher-stats></app-pitcher-stats>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<h2>Batting Statistics</h2>
+<select [(ngModel)]="selectedSeason" (change)="loadBatterStats()">
+  <option *ngFor="let year of generateYearsArray(1871, 2023)" [value]="year">
+    {{ year }}
+  </option>
+</select>
+
+<table>
+    <thead>
+      <tr>
+        <th (click)="sort('name')">Name</th>
+        <th (click)="sort('Age')">Age</th>
+        <th (click)="sort('Team')">Team</th>
+        <th (click)="sort('Height')">Height</th>
+        <th (click)="sort('Weight')">Weight</th>
+        <th (click)="sort('Bats')">Bats</th>
+        <th (click)="sort('Throws')">Throws</th>
+        <th (click)="sort('OPS')">OPS</th>
+        <th (click)="sort('SLG')">SLG</th>
+        <th (click)="sort('OBP')">OBP</th>
+        <th (click)="sort('AVG')">AVG</th>
+        <th (click)="sort('AB')">AB</th>
+        <th (click)="sort('H')">H</th>
+        <th (click)="sort('doubles')">2B</th>
+        <th (click)="sort('triples')">3B</th>
+        <th (click)="sort('HR')">HR</th>
+        <th (click)="sort('R')">R</th>
+        <th (click)="sort('RBI')">RBI</th>
+        <th (click)="sort('SB')">SB</th>
+        <th (click)="sort('SO')">SO</th>
+        <th (click)="sort('IBB')">IBB</th>
+        <th (click)="sort('HBP')">HBP</th>
+        <th (click)="sort('SF')">SF</th>
+        <th (click)="sort('SH')">SH</th>
+        <th (click)="sort('GIDP')">GIDP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of sortedBatters">
+        <td>{{ player.name }}</td>
+        <td>{{ player.Age }}</td>
+        <td>{{ player.Team }}</td>
+        <td>{{ player.Height }}</td>
+        <td>{{ player.Weight }}</td>
+        <td>{{ player.Bats }}</td>
+        <td>{{ player.Throws }}</td>
+        <td><span class="{{ isStatExceptional(player.OPS, .800) ? 'good-stat' : '' }}">{{ player.OPS }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.SLG, .500) ? 'good-stat' : '' }}">{{ player.SLG }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.OBP, .333) ? 'good-stat' : '' }}">{{ player.OBP }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.AVG, .265) ? 'good-stat' : 'bad-stat' }}">{{ player.AVG | number:'1.3-3' }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.AB, 600) ? 'good-stat' : '' }}">{{ player.AB }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.H, 175) ? 'good-stat' : '' }}">{{ player.H }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.doubles, 80) ? 'good-stat' : '' }}">{{ player.doubles }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.triples, 40) ? 'good-stat' : '' }}">{{ player.triples }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.HR, 30) ? 'good-stat' : '' }}">{{ player.HR }}</span></td>
+        <td><span class="{{ isStatExceptional(player.R, 60) ? 'good-stat' : '' }}">{{ player.R }}</span></td>
+        <td><span class="{{ isStatExceptional(player.RBI, 100) ? 'good-stat' : '' }}">{{ player.RBI }}</span></td>
+        <td><span class="{{ isStatExceptional(player.SB, 30) ? 'good-stat' : '' }}">{{ player.SB }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.SO, 100) ? 'bad-stat' : '' }}">{{ player.SO }}</span></td> 
+        <td>{{ player.IBB }}</td>
+        <td>{{ player.HBP }}</td>
+        <td><span class="{{ isStatExceptional(player.SF, 30) ? 'good-stat' : '' }}">{{ player.SF }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.SH, 30) ? 'good-stat' : '' }}">{{ player.SH }}</span></td> 
+        <td><span class="{{ isStatExceptional(player.GIDP, 30) ? 'bad-stat' : '' }}">{{ player.GIDP }}</span></td> 
+      </tr>
+    </tbody>
+  </table>
